@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "mysql2": "^2.3.3",
+    "nanoid": "^4.0.0",
+    "npm": "^8.13.2",
+    "sequelize": "^6.21.2"
+  },
+  "name": "forum-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flvasques/forum-node.git"
+  },
+  "author": "Fernando Vasques",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flvasques/forum-node/issues"
+  },
+  "homepage": "https://github.com/flvasques/forum-node#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
