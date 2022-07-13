@@ -1,0 +1,23 @@
+<ul id="dropdown1" class="dropdown-content">
+    <% if (user) { %>
+      <li><a href="/usuario/perfil">Perfil</a></li>
+    <% } else { %>
+      <li><a href="/usuario/login">Login</a></li>
+    <% } %> 
+    <li class="divider"></li>
+    <% if (user) { %>
+      <li><a href="/usuario/logout">Logout</a></li>
+    <% } else { %>
+      <li><a href="/usuario/cadastrar">Cadastre-se</a></li>
+    <% } %> 
+  </ul>
+  <nav>
+    <div class="nav-wrapper grey">
+      <a href="/" class="brand-logo">Duvidas de DEV</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/postagens">Todas as Postagens</a></li>
+        <li></li>
+        <li><a class="dropdown-trigger" data-target="dropdown1"><img src="/avatar.svg" style="width: 60px;" /><i class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
+    </div>
+  </nav>
