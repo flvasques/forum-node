@@ -1,0 +1,23 @@
+<html lang="pt_br">
+    <head>
+        <%- include('shared/head'); %>
+    </head>
+<body>
+    <%- include('shared/nav-bar', { user }); %>
+    
+    <div class="container">
+        <div class="col m10 offset-m1 post-card">
+            <%if (!pergunta) { %>
+                <h3 class="center-align">Pergunta não encontrada!</h3>
+            <% } else { %>
+            <h3><%= pergunta.titulo %></h3>
+            <pre><%= pergunta?.texto %></pre>
+            <p class="right-align"> Criado em: <%= pergunta?.createdAt.toLocaleDateString() %></p>
+            <% } %>
+        </div>
+    </div>
+    
+    <%- include('shared/footer'); %>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+    <head>
+        <%- include('shared/head'); %>
+    </head>
+    <body>
+        <%- include('shared/nav-bar', { user }); %>
+        
+        <main class="container">
+            <div class="col s6 offset-s3 signup-form">
+                <h2 class="center-align"><b>Qual sua duvida</b></h2>
+                <form method="post" action="/criar-pergunta">
+                    <input type="hidden" name="id" value="<%= pergunta?.id %>" />
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="title" type="text" name="titulo" value="<%= pergunta?.title %>" class="validate" required>
+                            <label for="email">Titulo</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" name="texto" class="materialize-textarea"><%= pergunta?.text %></textarea>
+                            <label for="textarea1">Corpo do Texto</label>
+                        </div>
+                    </div>
+                    <div class="right-align">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            <% if(pergunta?.id) { %>
+                                Editar
+                            <% } else { %>
+                                Criar
+                            <% } %>
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+        
+        <%- include('shared/footer'); %>
+        <script>
+            M.textareaAutoResize($('#textarea1'));
+        </script>
+    </body>
+</html>

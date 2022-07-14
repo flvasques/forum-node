@@ -1,7 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
-const http = require("http");
 const session = require('express-session');
 const sequelize = require('./dbService');
 const dbsync = require('./db-sync');
@@ -19,13 +17,18 @@ app.use(session({
 app.use(cors({ origin: "*" }));
 
 app.use(express.static('./public'));
+app.use('/css', express.static(__dirname + '/node_modules/materialize-css/dist/'));
 
 app.set('views', './views'); 
 app.set('view engine', 'ejs');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const index = require("./routes/index");
-app.use("/", index);
+const index = require('./routes/index');
+const user = require('./routes/user');
+app.use('/', index);
+app.use('/usuario', user);
 
 app.use(function (req, res, next) {
     const err = new Error("Not Found");

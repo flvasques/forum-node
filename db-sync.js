@@ -5,21 +5,30 @@ const Resposta = require('./models/resposta');
 
 const dbsync = async () => {
     User.hasMany(Pergunta, {
-        foreignKey: 'perguntas',
+        foreignKey: 'userId',
         as: 'perguntas'
     });
+    User.hasMany(Resposta, {
+        foreignKey: 'userId',
+        as: 'respostas'
+    });
+
     Pergunta.hasMany(Resposta, {
-        foreignKey: 'resposta',
+        foreignKey: 'id',
         as: 'resposta'
     });
     Pergunta.belongsTo(User, {
-        foreignKey: 'userId'
+        foreignKey: 'userId',
+        as: 'usuarioP'
     });
+
     Resposta.belongsTo(User, {
-        foreignKey: 'userId'
+        foreignKey: 'userId',
+        as: 'usuarioR'
     });
     Resposta.belongsTo(Pergunta, {
-        foreignKey: 'perguntaId'
+        foreignKey: 'perguntaId',
+        as: 'pergunta'
     });
 
     await sequelize.sync();

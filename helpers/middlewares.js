@@ -9,6 +9,7 @@ const notAuth = (req, res, next) => {
 }
 
 const goLogin = (req, res, next) => {
-    if (!req.session?.user) return next();
+    if (req.session?.user) return next();
     return res.redirect('/usuario/login');
 }
+module.exports = { isAuth, notAuth, goLogin };

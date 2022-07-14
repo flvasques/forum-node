@@ -20,14 +20,10 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    criadoEm: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: sequelize.NOW
-    },
     imgUrl: {
         type: DataTypes.STRING,
-        field: 'img_url'
+        field: 'img_url',
+        allowNull: true
     }
 }, {
     tableName: 'users'

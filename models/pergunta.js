@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../dbService');
+const User = require('../models/user');
 
 const Pergunta = sequelize.define('Pergunta', {
     id: {
@@ -9,7 +10,11 @@ const Pergunta = sequelize.define('Pergunta', {
     },
     userId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references : {
+            model: User,
+            key: 'id'
+        }
     },
     titulo: {
         type: DataTypes.STRING,
@@ -18,16 +23,6 @@ const Pergunta = sequelize.define('Pergunta', {
     texto: {
         type: DataTypes.TEXT,
         allowNull: false
-    },
-    criadoEm: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: sequelize.NOW
-    },
-    atualizadoEm: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: sequelize.NOW
     },
 }, {
     tableName: 'perguntas'

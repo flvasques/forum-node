@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+    <head>
+        <%- include('shared/head'); %>
+    </head>
+    <body>
+        <%- include('shared/nav-bar', { user }); %>
+        
+        <main class="container row">
+            <div class="signup-form">
+                <form method="post" action="/usuario/cadastrar" class="col s12">
+                    <div class="row">
+                        <input type="hidden" name="id" value="" />
+                        <div class="input-field col s12">
+                            <input placeholder="Nome Completo" maxlength="255" id="name" name="name" value="<%= name %>" type="text" class="validate" autofocus required />
+                            <label for="name">Nome</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" name="email" maxlength="255" type="email" value="<%= email %>" class="validate" required />
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" name="password" maxlength="255" type="password" value="" class="validate" required />
+                            <label for="password">Senha</label>
+                        </div>
+                    </div>
+                    <% if (msg) { %>
+                    <div class="card-panel red darken-1 white-text center-align"><strong><%= msg %></strong></div>
+                    <% } %>
+                    <div class="right-align">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Cadastrar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+        
+        <%- include('shared/footer'); %>
+    </body>
+
+</html>

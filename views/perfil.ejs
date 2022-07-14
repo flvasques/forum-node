@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+    <head>
+        <%- include('shared/head'); %>
+    </head>
+    <body>
+        <%- include('shared/nav-bar', { user }); %>
+        
+        <main class="container">
+            <aside>
+                <p class="center-align"><b>Ola! <%= user.nome %></b></p>
+                <ul class="collection">
+                    <li class="collection-item">Data de cadastro: <%=  moment(user.createdAt).format('DD/MM/YYYY') %></li>
+                    <li class="collection-item">Email: <%= user.email %></li>
+                </ul>
+                <a href="#" class="btn waves-effect waves-light"><i class="material-icons left">create</i>Editar Perfil</a>
+            </aside>
+            <section>
+                <div class="col m10 offset-m1 post-card">
+                    <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header">Suas Perguntas</div>
+                          <div class="collapsible-body">
+                            <% if(perguntas.length != 0) { %>
+                                <table class="highlight">
+                                    <thead>
+                                      <tr>
+                                          <th>Suas postagens</th>
+                                          <th>Ações</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% perguntas.forEach(function(item) { %>
+                                            <tr>
+                                                <td>
+                                                    <a href="/postagem/<%= item.id %>" class="collection-item"><%= item.title %></a>
+                                                </td>
+                                                <td>
+                                                    <a href="/editar-postagem/<%= item.id %>" class="btn-floating btn-small waves-effect waves-light"><i class="material-icons">create</i></a>
+                                                    <a href="/apagar-postagem/<%= item.id %>" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete_sweep</i></a>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    </tbody>
+                                  </table>
+                            <% } %>
+                            <% if(perguntas.length == 0) { %>
+                                <p class="center-align"><b>Você não criou nehuma pergunta ainda</b></p>
+                            <% } %>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header">Suas Respostas</div>
+                          <div class="collapsible-body">
+                            <% if(respostas.length != 0) { %>
+                                <table class="highlight">
+                                    <thead>
+                                      <tr>
+                                          <th>Suas postagens</th>
+                                          <th>Ações</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% perguntas.forEach(function(item) { %>
+                                            <tr>
+                                                <td>
+                                                    <a href="/postagem/<%= item.id %>" class="collection-item"><%= item.title %></a>
+                                                </td>
+                                                <td>
+                                                    <a href="/editar-postagem/<%= item.id %>" class="btn-floating btn-small waves-effect waves-light"><i class="material-icons">create</i></a>
+                                                    <a href="/apagar-postagem/<%= item.id %>" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete_sweep</i></a>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    </tbody>
+                                  </table>
+                            <% } %>
+                            <% if(respostas.length == 0) { %>
+                                <p class="center-align"><b>Você respondeu nada ainda</b></p>
+                            <% } %>
+                          </div>
+                          </div>
+                        </li>
+                      </ul>
+                   
+                </div>
+                
+                
+            </section>
+            <div class="right-align">
+                <a class="btn waves-effect waves-light" href="/nova-postagem">
+                    <i class="material-icons left">add</i>
+                    Perguntar Algo
+                </a>
+            </div>
+        </main>
+        
+        <%- include('shared/footer'); %>
+        <script>
+              $(document).ready(function(){
+                    $('.collapsible').collapsible();
+                });
+        </script>
+    </body>
+</html>
