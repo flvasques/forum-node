@@ -1,31 +1,28 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../dbService');
-const User = require('./user');
+const Pergunta = require('./pergunta');
 
-const Pergunta = sequelize.define('Pergunta', {
+const PerguntaArquivos = sequelize.define('PerguntaArquivos', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    userId: {
+    perguntaId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references : {
-            model: User,
+            model: Pergunta,
             key: 'id'
         }
     },
-    titulo: {
+    arqivo: {
         type: DataTypes.STRING,
-        allowNull: true
-    },
-    texto: {
-        type: DataTypes.TEXT,
         allowNull: false
     },
 }, {
-    tableName: 'perguntas'
+    tableName: 'pergunta_arquivos',
+    timestamps: false
 });
 
-module.exports = Pergunta;
+module.exports = PerguntaArquivos;

@@ -3,7 +3,7 @@ const sequelize = require('../dbService');
 const User = require('./user');
 const Pergunta = require('./pergunta');
 
-const Resposta = sequelize.define('Resposta', {
+const RespostaPontos = sequelize.define('RespostaPontos', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -17,7 +17,7 @@ const Resposta = sequelize.define('Resposta', {
             key: 'id'
         }
     },
-    perguntaId: {
+    respostaId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references : {
@@ -25,22 +25,13 @@ const Resposta = sequelize.define('Resposta', {
             key: 'id'
         }
     },
-    texto: {
-        type: DataTypes.TEXT,
-        allowNull: false
-    },
-    melhorResposta: {
-        type: DataTypes.BOOLEAN,
+    ponto: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0
-    },
-    criadoEm: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: sequelize.NOW
-    },
+    }
 }, {
-    tableName: 'respostas'
+    tableName: 'resposta_pontos'
 });
 
-module.exports = Resposta;
+module.exports = RespostaPontos;

@@ -5,7 +5,25 @@
     </head>
     <body>
         <%- include('shared/nav-bar'); %>
-        <h1>Ola Mundo!</h1>
+        <main class="container">
+            <section>
+             <% if(lista.length != 0) { %>
+                 <% lista.rows.forEach(function(item) { %>
+                     <article class="col m10 offset-m1 post-card">
+                         <h5><%= item.titulo %></h5>
+                         <p class="truncate"><%= item.texto %></p>
+                         <p class="right-align">em: <%= item.createdAt.toLocaleDateString() %></p>
+                         <p><a href="pergunta/<%= item.id %>">Ler mais</a></p>
+                         <hr />
+                     </article>
+                 <% }); %>
+             <% } else { %>
+                 <article class="col m10 offset-m1 post-card">
+                     <p class="center-align"><b>Sem postagens para apresentar</b></p>
+                 </article>
+             <% } %>
+            </section>
+        </main>
         <%- include('shared/footer'); %>
     </body>
 

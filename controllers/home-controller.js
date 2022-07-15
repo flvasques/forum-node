@@ -18,7 +18,6 @@ class HomeController {
                     { model: User, as: 'usuarioP' }
                 ]
             }).then(function(lista) {
-                console.log(lista);
                 return res.render('home', {lista: lista, user: user});
             });
         } catch (error) {
