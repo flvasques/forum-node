@@ -18,7 +18,7 @@ const dbsync = async () => {
     });
 
     Pergunta.hasMany(Resposta, {
-        foreignKey: 'id',
+        foreignKey: 'perguntaId',
         as: 'resposta'
     });
     Pergunta.belongsTo(User, {
@@ -28,6 +28,17 @@ const dbsync = async () => {
     Pergunta.hasMany(PerguntaArquivos, {
         foreignKey: 'perguntaId',
         as: 'arquivos'
+    });
+    Pergunta.belongsToMany(Tag, {
+        through: TagPergunta,
+        foreignKey: 'perguntaId',
+        as: 'tags'
+    });
+
+    Tag.belongsToMany(Pergunta, {
+        through: TagPergunta,
+        foreignKey: 'tagId',
+        as: 'perguntas'
     })
 
     Resposta.belongsTo(User, {

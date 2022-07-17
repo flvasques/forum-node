@@ -4,15 +4,6 @@ const Pergunta = require('./pergunta');
 const Tag = require('./tag');
 
 const TagPergunta = sequelize.define('TagPergunta', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    titulo: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
     perguntaId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -30,8 +21,7 @@ const TagPergunta = sequelize.define('TagPergunta', {
         }
     },
 }, {
-    tableName: 'tag_perguntas',
-    timestamps: false
+    tableName: 'tag_perguntas'
 });
 
 module.exports = TagPergunta;

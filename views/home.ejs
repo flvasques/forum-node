@@ -6,8 +6,21 @@
     <body>
         <%- include('shared/nav-bar'); %>
         <main class="container">
+            <aside class="row">
+                <form method="GET" class="filtros">
+                    <div class="input-field col s3">
+                        <select name="tag">
+                          <option value="0" selected>Filtrar por Tag</option>
+                          <% tags.forEach ( (tag) => { %>
+                            <option value="<%= tag.id %>" <%= (tagSelecionada == tag.id? 'selected': '') %>><%= tag.nome %></option>
+                          <% }); %>
+                        </select>
+                    </div>
+                    <button class="waves-effect waves-light btn btn-filtos" type="submit"><i class="material-icons">search</i></button>
+                </form>
+            </aside>
             <section>
-             <% if(lista.length != 0) { %>
+             <% if(lista.rows.length != 0) { %>
                  <% lista.rows.forEach(function(item) { %>
                      <article class="col m10 offset-m1 post-card">
                          <h5><%= item.titulo %></h5>
@@ -17,6 +30,9 @@
                          <hr />
                      </article>
                  <% }); %>
+                 <div class="center-align">
+                    <a href="/?pag=<%= proxPag %>" class="waves-effect waves-light btn">Carregar mais</a>
+                 </div>
              <% } else { %>
                  <article class="col m10 offset-m1 post-card">
                      <p class="center-align"><b>Sem postagens para apresentar</b></p>
@@ -24,6 +40,11 @@
              <% } %>
             </section>
         </main>
+        <script>
+             $(document).ready(function(){
+                $('select').formSelect();
+            });
+        </script>
         <%- include('shared/footer'); %>
     </body>
 

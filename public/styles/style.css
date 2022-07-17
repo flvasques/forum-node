@@ -1,5 +1,6 @@
 .container {
     min-height: 80vh !important;
+    margin-bottom: 20px;
 }
 .post-card {
     padding: 10px 10px;
@@ -25,4 +26,14 @@ pre {
 
 table {
     margin: 1em 0 1em 0;
+}
+
+.filtros {
+    padding: 10px;
+}
+.filtros .input-field {
+    margin-top: 0 !important;
+}
+.btn-filtos {
+    margin-top: 6px !important;
 }

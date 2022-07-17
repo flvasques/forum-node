@@ -5,18 +5,91 @@
 <body>
     <%- include('shared/nav-bar', { user }); %>
     
-    <div class="container">
-        <div class="col m10 offset-m1 post-card">
-            <%if (!pergunta) { %>
+    <main class="container">
+        <section class="col m10 offset-m1 post-card">
+            <% if (!pergunta) { %>
                 <h3 class="center-align">Pergunta não encontrada!</h3>
             <% } else { %>
-            <h3><%= pergunta.titulo %></h3>
-            <pre><%= pergunta?.texto %></pre>
-            <p class="right-align"> Criado em: <%= pergunta?.createdAt.toLocaleDateString() %></p>
+                <article>
+                    <h3><%= pergunta.titulo %></h3>
+                    <pre><%= pergunta?.texto %></pre>
+                </article>
+                <% if(pergunta.arquivos) { %>
+                <div class="row">
+                    <% pergunta.arquivos.forEach(function(item) { %>
+                        <div class="col s2">
+                            <img class="materialboxed" width="150" src="data:image/*;base64,<%= item.arquivo %>" />
+                        </div>
+                    <% }); %>
+                </div>
+                <% } %>
+                <aside>
+                    <p>
+                        <% pergunta.tags.forEach ( (tag) => { %>
+                            <a><%= tag.nome %>, </a>
+                        <% }); %>
+                    </p>
+                </aside>
+                <p class="right-align"> Por: <%= pergunta.usuarioP?.nome %></p>
+                <p class="right-align"> Criado em: <%= pergunta?.createdAt.toLocaleDateString() %></p>
             <% } %>
-        </div>
-    </div>
-    
+        </section>
+        <section>
+            <p>Resposntas</p>
+            <% respostas.forEach ( (item) => { %>
+               <aricle class="row">
+                    <div class="col s1">
+                        <a href="/votar/<%= item.id %>/1" title="positivar"><p class="center-align"><i class="material-icons">arrow_drop_up</i></p></a>
+                        <p class="center-align"><%= (item.positivos - item.negativos) %></p>
+                        <a href="/votar/<%= item.id %>/-1" title="negativar"><p class="center-align"><i class="material-icons">arrow_drop_down</i></p></a>
+                    </div>                    
+                    <pre class="col s10"><%= item.texto %></pre>
+                    <div class="col s1">
+                        
+                        <% if (pergunta.userId == user?.id) { %>
+                            <p class="center-align">
+                                <a href="/melhor-resposta/<%= item.id %>" title="melhor Resposta marcar/ desmarcar">
+                                    <i class="material-icons <%= (item.melhorResposta? 'green-text': 'grey-text') %>">done_all</i>
+                                </a>
+                            </p>
+                        <% } else { %>
+                            <% if (item.melhorResposta) { %>
+                                <p class="center-align" title="melhor resposta"><i class="material-icons green-text">done_all</i></p>
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <hr />
+               </aricle>
+            <% }); %>
+        </section>
+        <% if (pergunta && user) { %>
+            <section>
+                <p>Cira uma resposta</p>
+                <form method="post" action="/responder" >
+                    <div class="row">
+                        <input type="hidden" name="perguntaId" value="<%= pergunta?.id %>" />
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" name="texto" class="materialize-textarea" required></textarea>
+                            <label for="textarea1">Sua Resposta</label>
+                        </div>
+                    </div>
+                    <div class="right-align">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Enviar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </section>
+        <% } %>
+    </main>
+        
+    <script>
+        $(document).ready(function(){
+            $('.materialboxed').materialbox();
+            M.textareaAutoResize($('#textarea1'));
+        });
+    </script>
     <%- include('shared/footer'); %>
 </body>
 

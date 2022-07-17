@@ -86,7 +86,7 @@ class UserController {
                     const correto = bcrypt.compareSync(password, usuario.password);
                     if (correto) {
                         req.session.user = usuario;
-                        return res.redirect('/');
+                        return res.redirect('/usuario/perfil');
                     } else {
                         res.render('login', {user: null, msg: 'Email os senha incorretos', email: email});
                     }

@@ -5,6 +5,13 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 const connection = mySql.createConnection(env.optConect);
 
-const sequelize = new Sequelize(env.optConect.database, env.optConect.user, env.optConect.password, { dialect: 'mysql' });
+const sequelize = new Sequelize(env.optConect.database, env.optConect.user, env.optConect.password, {
+     dialect: 'mysql',
+     pool: {
+        max: 1,
+        min: 1,
+        idel: 10000
+    }
+    });
 
 module.exports = sequelize;

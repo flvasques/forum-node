@@ -13,31 +13,25 @@
                     <li class="collection-item">Data de cadastro: <%=  moment(user.createdAt).format('DD/MM/YYYY') %></li>
                     <li class="collection-item">Email: <%= user.email %></li>
                 </ul>
-                <a href="#" class="btn waves-effect waves-light"><i class="material-icons left">create</i>Editar Perfil</a>
             </aside>
             <section>
                 <div class="col m10 offset-m1 post-card">
                     <ul class="collapsible">
                         <li>
-                          <div class="collapsible-header">Suas Perguntas</div>
+                          <div class="collapsible-header"  title="clique para expandir">Suas Perguntas Total: (<%= perguntas.length %>)</div>
                           <div class="collapsible-body">
                             <% if(perguntas.length != 0) { %>
-                                <table class="highlight">
+                                <table class="striped">
                                     <thead>
                                       <tr>
-                                          <th>Suas postagens</th>
-                                          <th>Ações</th>
+                                          <th>Suas perguntas</th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                         <% perguntas.forEach(function(item) { %>
                                             <tr>
                                                 <td>
-                                                    <a href="/postagem/<%= item.id %>" class="collection-item"><%= item.title %></a>
-                                                </td>
-                                                <td>
-                                                    <a href="/editar-postagem/<%= item.id %>" class="btn-floating btn-small waves-effect waves-light"><i class="material-icons">create</i></a>
-                                                    <a href="/apagar-postagem/<%= item.id %>" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete_sweep</i></a>
+                                                    <a href="/pergunta/<%= item.id %>" class="collection-item"><%= item.titulo %></a>
                                                 </td>
                                             </tr>
                                         <% }); %>
@@ -50,29 +44,35 @@
                           </div>
                         </li>
                         <li>
-                          <div class="collapsible-header">Suas Respostas</div>
+                          <div class="collapsible-header" title="clique para expandir">Suas Respostas  (Total: <%= respostas.length %>)</div>
                           <div class="collapsible-body">
                             <% if(respostas.length != 0) { %>
-                                <table class="highlight">
+                                <table class="striped">
                                     <thead>
                                       <tr>
                                           <th>Suas postagens</th>
-                                          <th>Ações</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                        <% perguntas.forEach(function(item) { %>
+                                        <% var pos = 0; var neg = 0; %>
+                                        <% respostas.forEach(function(item) { %>
                                             <tr>
-                                                <td>
-                                                    <a href="/postagem/<%= item.id %>" class="collection-item"><%= item.title %></a>
-                                                </td>
-                                                <td>
-                                                    <a href="/editar-postagem/<%= item.id %>" class="btn-floating btn-small waves-effect waves-light"><i class="material-icons">create</i></a>
-                                                    <a href="/apagar-postagem/<%= item.id %>" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete_sweep</i></a>
+                                                <td class="truncate">
+                                                    <a href="/pergunta/<%= item.perguntaId %>" class="collection-item"><%= item.texto %></a>
                                                 </td>
                                             </tr>
-                                        <% }); %>
+                                        <% pos += item.positivos; %>
+                                        <% neg += item.negativos; %>
+                                        <%  }); %>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>Total de pontos positivos: <%= pos %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total de pontos negativos: <%= neg %></td>
+                                        </tr>
+                                    </tfoot>
                                   </table>
                             <% } %>
                             <% if(respostas.length == 0) { %>
@@ -88,7 +88,7 @@
                 
             </section>
             <div class="right-align">
-                <a class="btn waves-effect waves-light" href="/nova-postagem">
+                <a class="btn waves-effect waves-light" href="/perguntar">
                     <i class="material-icons left">add</i>
                     Perguntar Algo
                 </a>

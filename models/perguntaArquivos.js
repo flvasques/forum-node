@@ -16,8 +16,8 @@ const PerguntaArquivos = sequelize.define('PerguntaArquivos', {
             key: 'id'
         }
     },
-    arqivo: {
-        type: DataTypes.STRING,
+    arquivo: {
+        type: DataTypes.BLOB,
         allowNull: false
     },
 }, {

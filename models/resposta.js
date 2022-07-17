@@ -34,11 +34,16 @@ const Resposta = sequelize.define('Resposta', {
         allowNull: false,
         defaultValue: 0
     },
-    criadoEm: {
-        type: DataTypes.DATE,
+    negativos: {
+        type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: sequelize.NOW
+        defaultValue: 0
     },
+    positivos: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    }
 }, {
     tableName: 'respostas'
 });
